@@ -1,34 +1,34 @@
-// Simplest FFmpeg Screen Recorder.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// Simplest FFmpeg Screen Recorder.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 /**
-* ×î¼òµ¥µÄ»ùÓÚ FFmpeg µÄ AVDevice Àı×Ó£¨ÆÁÄ»Â¼ÖÆ£©
+* æœ€ç®€å•çš„åŸºäº FFmpeg çš„ AVDevice ä¾‹å­ï¼ˆå±å¹•å½•åˆ¶ï¼‰
 * Simplest FFmpeg Screen Recorder
 *
-* Ô´³ÌĞò£º
-* À×Ïöæè Lei Xiaohua
+* æºç¨‹åºï¼š
+* é›·éœ„éª… Lei Xiaohua
 * leixiaohua1020@126.com
-* ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
+* ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
 * Communication University of China / Digital TV Technology
 * http://blog.csdn.net/leixiaohua1020
 *
-* ĞŞ¸Ä£º
-* ÁõÎÄ³¿ Liu Wenchen
+* ä¿®æ”¹ï¼š
+* åˆ˜æ–‡æ™¨ Liu Wenchen
 * 812288728@qq.com
-* µç×Ó¿Æ¼¼´óÑ§/µç×ÓĞÅÏ¢
+* ç”µå­ç§‘æŠ€å¤§å­¦/ç”µå­ä¿¡æ¯
 * University of Electronic Science and Technology of China / Electronic and Information Science
 * https://blog.csdn.net/ProgramNovice
 *
-* ±¾³ÌĞòÊµÏÖÁËÆÁÄ»Â¼ÖÆ¹¦ÄÜ£¬¿ÉÒÔÂ¼ÖÆ²¢²¥·Å×ÀÃæÊı¾İ¡£
-* ÊÇ»ùÓÚ FFmpeg µÄ libavdevice Àà¿â×î¼òµ¥µÄÀı×Ó¡£
-* Í¨¹ı¸ÃÀı×Ó£¬¿ÉÒÔÑ§Ï° FFmpeg ÖĞ libavdevice Àà¿âµÄÊ¹ÓÃ·½·¨¡£
+* æœ¬ç¨‹åºå®ç°äº†å±å¹•å½•åˆ¶åŠŸèƒ½ï¼Œå¯ä»¥å½•åˆ¶å¹¶æ’­æ”¾æ¡Œé¢æ•°æ®ã€‚
+* æ˜¯åŸºäº FFmpeg çš„ libavdevice ç±»åº“æœ€ç®€å•çš„ä¾‹å­ã€‚
+* é€šè¿‡è¯¥ä¾‹å­ï¼Œå¯ä»¥å­¦ä¹  FFmpeg ä¸­ libavdevice ç±»åº“çš„ä½¿ç”¨æ–¹æ³•ã€‚
 *
-* ±¾³ÌĞòÔÚ Windows ÏÂ¿ÉÒÔÊ¹ÓÃ 2 ÖÖ·½Ê½Â¼ÖÆÆÁÄ»£º
-*  1. gdigrab: Win32 ÏÂµÄ»ùÓÚ GDI µÄÆÁÄ»Â¼ÖÆÉè±¸¡£×¥È¡×ÀÃæµÄÊ±ºò£¬ÊäÈëURLÎª¡°desktop¡±¡£
-*  2. dshow: Ê¹ÓÃ Directshow¡£×¢ÒâĞèÒª°²×°¶îÍâµÄÈí¼ş screen-capture-recorder¡£
+* æœ¬ç¨‹åºåœ¨ Windows ä¸‹å¯ä»¥ä½¿ç”¨ 2 ç§æ–¹å¼å½•åˆ¶å±å¹•ï¼š
+*  1. gdigrab: Win32 ä¸‹çš„åŸºäº GDI çš„å±å¹•å½•åˆ¶è®¾å¤‡ã€‚æŠ“å–æ¡Œé¢çš„æ—¶å€™ï¼Œè¾“å…¥ URL ä¸ºâ€œdesktopâ€ã€‚
+*  2. dshow: ä½¿ç”¨ Directshowã€‚æ³¨æ„éœ€è¦å®‰è£…é¢å¤–çš„è½¯ä»¶ screen-capture-recorderã€‚
 *
-* ÔÚ Linux ÏÂ¿ÉÒÔÊ¹ÓÃ x11grab Â¼ÖÆÆÁÄ»¡£
-* ÔÚ MacOS ÏÂ¿ÉÒÔÊ¹ÓÃ avfoundation Â¼ÖÆÆÁÄ»¡£
+* åœ¨ Linux ä¸‹å¯ä»¥ä½¿ç”¨ x11grab å½•åˆ¶å±å¹•ã€‚
+* åœ¨ MacOS ä¸‹å¯ä»¥ä½¿ç”¨ avfoundation å½•åˆ¶å±å¹•ã€‚
 *
 * This software capture screen of computer. It's the simplest example
 * about usage of FFmpeg's libavdevice Library.
@@ -46,14 +46,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// ½â¾ö±¨´í£º'fopen': This function or variable may be unsafe.Consider using fopen_s instead.
+// è§£å†³æŠ¥é”™ï¼š'fopen': This function or variable may be unsafe.Consider using fopen_s instead.
 #pragma warning(disable:4996)
 
-// ½â¾ö±¨´í£ºÎŞ·¨½âÎöµÄÍâ²¿·ûºÅ __imp__fprintf£¬¸Ã·ûºÅÔÚº¯Êı _ShowError ÖĞ±»ÒıÓÃ
+// è§£å†³æŠ¥é”™ï¼šæ— æ³•è§£æçš„å¤–éƒ¨ç¬¦å· __imp__fprintfï¼Œè¯¥ç¬¦å·åœ¨å‡½æ•° _ShowError ä¸­è¢«å¼•ç”¨
 #pragma comment(lib, "legacy_stdio_definitions.lib")
 extern "C"
 {
-	// ½â¾ö±¨´í£ºÎŞ·¨½âÎöµÄÍâ²¿·ûºÅ __imp____iob_func£¬¸Ã·ûºÅÔÚº¯Êı _ShowError ÖĞ±»ÒıÓÃ
+	// è§£å†³æŠ¥é”™ï¼šæ— æ³•è§£æçš„å¤–éƒ¨ç¬¦å· __imp____iob_funcï¼Œè¯¥ç¬¦å·åœ¨å‡½æ•° _ShowError ä¸­è¢«å¼•ç”¨
 	FILE __iob_func[3] = { *stdin, *stdout, *stderr };
 }
 
@@ -87,7 +87,7 @@ extern "C"
 
 // Output YUV420P 
 #define OUTPUT_YUV420P 0
-// 1£ºUse Dshow; 0: Use GDIgrab
+// 1ï¼šUse Dshow; 0: Use GDIgrab
 #define USE_DSHOW 1
 
 // Refresh Event
@@ -305,7 +305,7 @@ int main(int argc, char* argv[])
 	screen_h = vi->current_h / 2;
 
 	SDL_Surface *screen;
-	// ³õÊ¼»¯ÆÁÄ»£¨SDL »æÖÆµÄ´°¿Ú£©
+	// åˆå§‹åŒ–å±å¹•ï¼ˆSDL ç»˜åˆ¶çš„çª—å£ï¼‰
 	screen = SDL_SetVideoMode(screen_w, screen_h, 0, 0);
 
 	if (!screen)
@@ -334,9 +334,9 @@ int main(int argc, char* argv[])
 	struct SwsContext *img_convert_ctx;
 	img_convert_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt,
 		pCodecCtx->width, pCodecCtx->height, AV_PIX_FMT_YUV420P, SWS_BICUBIC, NULL, NULL, NULL);
-	// SDL Ïß³Ì
+	// SDL çº¿ç¨‹
 	SDL_Thread *video_tid = SDL_CreateThread(sfp_refresh_thread, NULL);
-	// ÉèÖÃ´°¿Ú±êÌâ
+	// è®¾ç½®çª—å£æ ‡é¢˜
 	SDL_WM_SetCaption("Simplest FFmpeg Screen Recorder", NULL);
 	// Event Loop
 	SDL_Event event;
